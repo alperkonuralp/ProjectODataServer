@@ -1,11 +1,19 @@
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using Microsoft.OData.Edm;
+using Sample.Data.DbContexts;
+using Sample.Data.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -14,6 +22,8 @@ namespace ProjectODataServer
 {
 	public class Startup
 	{
+		//public static readonly ILoggerFactory loggerFactory = ;
+
 		public static IWindsorContainer Container { get; } = new WindsorContainer();
 
 		public Startup(IConfiguration configuration)
@@ -30,6 +40,16 @@ namespace ProjectODataServer
 
 			services.AddOptions();
 			services.AddControllers();
+
+			services.AddOData();
+
+			services.AddDbContext<SampleDataDbContext>(c => 
+				c
+				.EnableSensitiveDataLogging()
+				.EnableDetailedErrors()
+				//.UseLoggerFactory(loggerFactory)
+				.UseSqlite("Data Source=SampleData.db")
+				);
 
 			Container.Register(
 				Component.For<IConfiguration>()
@@ -65,7 +85,19 @@ namespace ProjectODataServer
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
+
+				endpoints.Select().Filter().OrderBy().Count().MaxTop(100).Expand();
+				endpoints.MapODataRoute("odata", "odata", GetEdmModel());
 			});
+		}
+
+		private IEdmModel GetEdmModel()
+		{
+			var odataBuilder = new ODataConventionModelBuilder();
+			odataBuilder.EntitySet<Category>("Category");
+			odataBuilder.EntitySet<Product>("Product");
+
+			return odataBuilder.GetEdmModel();
 		}
 	}
 }
