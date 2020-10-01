@@ -51,7 +51,7 @@ namespace ProjectODataServer
 
 			services.AddOptions();
 			services.AddControllers()
-				.ConfigureApplicationPartManager(m=>m.FeatureProviders.Add(new GenericTypeControllerFeatureProvider()))
+				//.ConfigureApplicationPartManager(m=>m.FeatureProviders.Add(new GenericTypeControllerFeatureProvider()))
 				;
 
 			services.AddOData();

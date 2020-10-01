@@ -20,7 +20,7 @@
     "ProjectODataServer": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "odata/category",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

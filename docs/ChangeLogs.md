@@ -1,5 +1,27 @@
 # Project OData Server Change Logs
 
+## Episode - 7 OData ile Select | OData With Select
+
+Bu 7. bölümde, OData Kontrolörlerimizde olmasını isteyeceğimiz iki özelliği inceliyoruz. Böylece OData kontrolörlerimiz daha yetenekli olacaklar.  
+In this episode 7, we examine two features we would like to have in our OData Controllers. Thus, our OData controllers will be more capable.
+
+-------------------
+
+## Episode - 6 Dinamik Kontrolörler | Dynamic Controllers
+
+Bu 6. bölümde projemize, projemizin en önemli parçalarından olan dinamik kod çalıştırma ile ilgileniyoruz. Yani çalışma zamanında string olarak hazırladığımız kodları derleyip, odata sunucumuzu bu dinamik kodlarla çalıştırıyoruz. Bu bölüm benim için en heyecan verici bölümlerden biri. Hadi ne duruyoruz, hemen başlayalım.  
+This 6th episode is about "dynamic code execution", one of the most important parts of our project. In other words, we compile the codes we have prepared as strings at runtime and run our OData server with these dynamic codes. This episode is one of the most exciting episodes for me. Come on, let's get started right away.
+
+Bölüm linkleri | Section links:
+
+1. Generic and dynamically generated controllers in ASP.NET Core MVC : [strathweb.com/2018/04/generic-and-dynamically-generated-controllers-in-asp-net-core-mvc/](https://www.strathweb.com/2018/04/generic-and-dynamically-generated-controllers-in-asp-net-core-mvc/)
+2. ASP.Net Core register Controller at runtime : [stackoverflow.com/questions/46156649/asp-net-core-register-controller-at-runtime](https://stackoverflow.com/questions/46156649/asp-net-core-register-controller-at-runtime)
+3. Generic controllers in ASP.Net Core : [www.ben-morris.com/generic-controllers-in-asp-net-core/](https://www.ben-morris.com/generic-controllers-in-asp-net-core/)
+4. Share controllers, views, Razor Pages and more with Application Parts : [docs.microsoft.com/en-us/aspnet/core/mvc/advanced/app-parts?view=aspnetcore-3.1](https://docs.microsoft.com/en-us/aspnet/core/mvc/advanced/app-parts?view=aspnetcore-3.1) 
+5. ASP. Net core to realize dynamic web API : [developpaper.com/asp-net-core-to-realize-dynamic-web-api/](https://developpaper.com/asp-net-core-to-realize-dynamic-web-api/)
+
+---------
+
 ## Episode - 5 OData'ya Giriş | Introduction to OData
 
 Bu 5. bölümde projemize, OData'yı ekliyoruz. Bir önceki bölümde hazırladığımız 2 varlığı dünyaya açacağız.  
