@@ -1,5 +1,19 @@
 # Project OData Server Change Logs
 
+## Episode - 10 OData ile Post ve Put (2) | OData with Post & Put (2)
+
+Bu 10. bölümde, OData Kontrolörlerimizde yazdığımız Post ve Put metotları içindeki bir probleme el atıyoruz. Esasında bu, ilk yazdığımızda eksik bıraktığımız bir konu idi. Böylece ilişkili entity'leri de beraber kaydedip, değiştirebileceğiz.  
+In this 10th episode, we address a problem in the Post and Put methods we wrote in our OData Controllers. In fact, this was a subject we left incomplete when we first wrote. Thus, we will be able to save and change associated entities together.
+
+Bölüm linkleri | Section links:
+
+1. Routing Conventions in ASP.NET Web API 2 Odata : https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-routing-conventions
+2. DynamicEdmModelCreation : https://github.com/OData/ODataSamples/tree/master/WebApiCore/DynamicEdmModelCreation
+3. Operations (OData Version 2.0) : https://www.odata.org/documentation/odata-version-2-0/operations/
+4. Understand OData in 6 steps : https://www.odata.org/getting-started/understand-odata-in-6-steps/
+
+-------------------
+
 ## Episode - 9 OData ile Patch | OData with Patch
 
 Bu 9. bölümde, OData Kontrolörlerimizde olmasını isteyeceğimiz "Patch" özelliğini inceliyoruz. Ancak buna geçmeden önce, bir önceki bölümde "ProductController" üzerinde yapmayı unuttuğumuz bazı işleri tamamlayacağız.  

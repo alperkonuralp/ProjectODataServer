@@ -19,6 +19,25 @@ Content-Type: application/json
 }
 
 
+
+
+###
+# Add Category with Products
+POST https://localhost:5001/odata/category 
+Content-Type: application/json
+
+{
+    "Name": "Deneme 3",
+    "Products": [
+        {"Name": "Deneme Ürünü 3 A"},
+        {"Name": "Deneme Ürünü 3 B"},
+        {"Name": "Deneme Ürünü 3 C"},
+        {"Name": "Deneme Ürünü 3 D"}
+    ]
+}
+
+
+
 ###
 
 PUT https://localhost:5001/odata/category(3)
@@ -45,3 +64,56 @@ Content-Type: application/json
 DELETE https://localhost:5001/odata/category(4)
 Content-Type: application/json
 
+
+
+
+
+###
+
+POST https://localhost:5001/odata/product 
+Content-Type: application/json
+
+{
+    "CategoryId": 1,
+    "Name": "Deneme Ürünü 1"
+}
+
+
+
+###
+
+POST https://localhost:5001/odata/product 
+Content-Type: application/json
+
+{
+    "Category": {
+        "Name": "Deneme Ürün Kategorisi"
+    },
+    "Name": "Deneme Ürünü 2"
+}
+
+
+
+
+###
+
+PUT https://localhost:5001/odata/product(10)
+Content-Type: application/json
+
+{
+    "CategoryId": 1,
+    "Name": "Deneme Ürünü 3 E"
+}
+
+
+###
+
+PUT https://localhost:5001/odata/product(10)
+Content-Type: application/json
+
+{
+    "Category": {
+        "Name": "C1"
+    },
+    "Name": "Deneme Ürünü 3 F"
+}

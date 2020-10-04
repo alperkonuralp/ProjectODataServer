@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Sample.Data.DbContexts;
 using Sample.Data.Entities;
 using System.Linq;
@@ -58,7 +59,7 @@ namespace ProjectODataServer.Controllers.OData
 
 			var a = _db.ChangeTracker.Entries();
 
-			if (a.Any(x => x.State == Microsoft.EntityFrameworkCore.EntityState.Modified))
+			if (a.Any(x => x.State == EntityState.Modified || x.State == EntityState.Added || x.State == EntityState.Deleted))
 				_db.SaveChanges();
 
 			return NoContent();
@@ -75,7 +76,7 @@ namespace ProjectODataServer.Controllers.OData
 
 			var a = _db.ChangeTracker.Entries();
 
-			if (a.Any(x => x.State == Microsoft.EntityFrameworkCore.EntityState.Modified))
+			if (a.Any(x => x.State == EntityState.Modified || x.State == EntityState.Added || x.State == EntityState.Deleted))
 				_db.SaveChanges();
 
 			return NoContent();
