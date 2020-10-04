@@ -15,5 +15,23 @@ POST https://localhost:5001/odata/category
 Content-Type: application/json
 
 {
-    "Name": "Deneme 1"
+    "Name": "Deneme 2"
 }
+
+
+###
+
+PUT https://localhost:5001/odata/category(3)
+Content-Type: application/json
+
+{
+    "Name": "Deneme 1a"
+}
+
+
+
+###
+
+DELETE https://localhost:5001/odata/category(4)
+Content-Type: application/json
+
