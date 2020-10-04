@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Sample.Data.DbContexts;
 using Sample.Data.Entities;
 using System.Linq;
-using System.Net.Http;
 
 namespace ProjectODataServer.Controllers.OData
 {
@@ -31,17 +30,12 @@ namespace ProjectODataServer.Controllers.OData
 		}
 
 		[EnableQuery]
-		public IQueryable<Product> GetProducts(int key, ODataQueryOptions<Category> options)
+		public IActionResult GetProducts(int key, ODataQueryOptions<Category> options)
 		{
-			//return _db.Set<Category>()
-			//	.Include(x=>x.Products)
-			//	.FirstOrDefault(x=>x.Id == key)
-			//	.Products
-			//	.AsQueryable();
-			return _db.Set<Product>()
-				.Where(x => x.CategoryId == key);
-		}
+			if (!_db.Set<Category>().Any(x => x.Id == key)) return NotFound();
 
+			return Ok(_db.Set<Product>().Where(x => x.CategoryId == key));
+		}
 
 		[HttpPost]
 		public IActionResult Post([FromBody] Category item)
@@ -52,8 +46,6 @@ namespace ProjectODataServer.Controllers.OData
 
 			return StatusCode(201, item);
 		}
-
-
 
 		[HttpPut]
 		public IActionResult Put([FromODataUri] int key, [FromBody] Category item)
@@ -72,9 +64,22 @@ namespace ProjectODataServer.Controllers.OData
 			return NoContent();
 		}
 
+		[HttpPatch]
+		public IActionResult Patch([FromODataUri] int key, Delta<Category> item)
+		{
+			var entity = _db.Set<Category>().Find(key);
 
+			if (entity == null) return NotFound();
 
+			item.Patch(entity);
 
+			var a = _db.ChangeTracker.Entries();
+
+			if (a.Any(x => x.State == Microsoft.EntityFrameworkCore.EntityState.Modified))
+				_db.SaveChanges();
+
+			return NoContent();
+		}
 
 		[HttpDelete]
 		public IActionResult Delete([FromODataUri] int key)

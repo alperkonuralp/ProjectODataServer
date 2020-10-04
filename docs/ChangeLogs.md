@@ -1,5 +1,19 @@
 # Project OData Server Change Logs
 
+## Episode - 9 OData ile Patch | OData with Patch
+
+Bu 9. bölümde, OData Kontrolörlerimizde olmasını isteyeceğimiz "Patch" özelliğini inceliyoruz. Ancak buna geçmeden önce, bir önceki bölümde "ProductController" üzerinde yapmayı unuttuğumuz bazı işleri tamamlayacağız.  
+In this 9th episode, we examine the "Patch" feature that we want to have on our OData Controllers. But before we get to that, we'll complete some work we forgot to do on "ProductController" in the previous episode.
+
+Bölüm linkleri | Section links:
+
+1. Routing Conventions in ASP.NET Web API 2 Odata : https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-routing-conventions
+2. DynamicEdmModelCreation : https://github.com/OData/ODataSamples/tree/master/WebApiCore/DynamicEdmModelCreation
+3. Operations (OData Version 2.0) : https://www.odata.org/documentation/odata-version-2-0/operations/
+4. Understand OData in 6 steps : https://www.odata.org/getting-started/understand-odata-in-6-steps/
+
+-------------------
+
 ## Episode - 8 OData ile Post, Put ve Delete | OData with Post, Put & Delete
 
 Bu 8. bölümde, OData Kontrolörlerimizde olmasını isteyeceğimiz üç özelliği inceliyoruz. Bu bölümde yazdıklarımız ile beraber OData Kontrolörlerimiz CRUD işlemlerinin tamamını yapabilecekler.  

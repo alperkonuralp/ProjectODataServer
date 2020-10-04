@@ -24,19 +24,18 @@ namespace ProjectODataServer.Controllers.OData
 		}
 
 		[EnableQuery]
-		public SingleResult<Product> Get(int key, ODataQueryOptions<Product> options)
+		public IActionResult Get(int key, ODataQueryOptions<Product> options)
 		{
-			return SingleResult<Product>.Create(_db.Set<Product>().Where(x => x.Id == key));
+			if (!_db.Set<Product>().Any(x => x.Id == key)) return NotFound();
+			return Ok(SingleResult<Product>.Create(_db.Set<Product>().Where(x => x.Id == key)));
 		}
-
 
 		[EnableQuery]
-		public SingleResult<Category> GetCategory(int key, ODataQueryOptions<Product> options)
+		public IActionResult GetCategory(int key, ODataQueryOptions<Product> options)
 		{
-			return SingleResult<Category>.Create(_db.Set<Product>().Include(x => x.Category).Where(x => x.Id == key).Select(x => x.Category));
+			if (!_db.Set<Product>().Any(x => x.Id == key)) return NotFound();
+			return Ok(SingleResult.Create(_db.Set<Product>().Include(x => x.Category).Where(x => x.Id == key).Select(x => x.Category)));
 		}
-
-
 
 		[HttpPost]
 		public IActionResult Post([FromBody] Product item)
@@ -46,6 +45,55 @@ namespace ProjectODataServer.Controllers.OData
 			_db.SaveChanges();
 
 			return StatusCode(201, item);
+		}
+
+		[HttpPut]
+		public IActionResult Put([FromODataUri] int key, [FromBody] Product item)
+		{
+			var entity = _db.Set<Product>().Find(key);
+
+			if (entity == null) return NotFound();
+
+			if (entity.Name != item.Name) entity.Name = item.Name;
+
+			var a = _db.ChangeTracker.Entries();
+
+			if (a.Any(x => x.State == Microsoft.EntityFrameworkCore.EntityState.Modified))
+				_db.SaveChanges();
+
+			return NoContent();
+		}
+
+
+		[HttpPatch]
+		public IActionResult Patch([FromODataUri] int key, Delta<Product> item)
+		{
+			var entity = _db.Set<Product>().Find(key);
+
+			if (entity == null) return NotFound();
+
+			item.Patch(entity);
+
+			var a = _db.ChangeTracker.Entries();
+
+			if (a.Any(x => x.State == Microsoft.EntityFrameworkCore.EntityState.Modified))
+				_db.SaveChanges();
+
+			return NoContent();
+		}
+
+		[HttpDelete]
+		public IActionResult Delete([FromODataUri] int key)
+		{
+			var entity = _db.Set<Product>().Find(key);
+
+			if (entity == null) return NotFound();
+
+			_db.Set<Product>().Remove(entity);
+
+			_db.SaveChanges();
+
+			return Ok();
 		}
 	}
 }

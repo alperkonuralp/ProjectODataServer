@@ -29,6 +29,16 @@ Content-Type: application/json
 }
 
 
+###
+
+PATCH https://localhost:5001/odata/category(3)
+Content-Type: application/json
+
+{
+    "Name": "Deneme 1"
+}
+
+
 
 ###
 
