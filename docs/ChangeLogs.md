@@ -1,5 +1,19 @@
 # Project OData Server Change Logs
 
+## Episode - 8 OData ile Post, Put ve Delete | OData with Post, Put & Delete
+
+Bu 8. bölümde, OData Kontrolörlerimizde olmasını isteyeceğimiz üç özelliği inceliyoruz. Bu bölümde yazdıklarımız ile beraber OData Kontrolörlerimiz CRUD işlemlerinin tamamını yapabilecekler.  
+In this episode 8, we examine three features we would like to have in our OData Controllers.  With what we have written in this episode, our OData Controllers will be able to do all of the CRUD operations.
+
+Bölüm linkleri | Section links:
+
+1. Routing Conventions in ASP.NET Web API 2 Odata : https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-routing-conventions
+2. DynamicEdmModelCreation : https://github.com/OData/ODataSamples/tree/master/WebApiCore/DynamicEdmModelCreation
+3. Operations (OData Version 2.0) : https://www.odata.org/documentation/odata-version-2-0/operations/
+4. Understand OData in 6 steps : https://www.odata.org/getting-started/understand-odata-in-6-steps/
+
+-------------------
+
 ## Episode - 7 OData ile Select | OData With Select
 
 Bu 7. bölümde, OData Kontrolörlerimizde olmasını isteyeceğimiz iki özelliği inceliyoruz. Böylece OData kontrolörlerimiz daha yetenekli olacaklar.  

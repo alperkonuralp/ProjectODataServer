@@ -33,7 +33,19 @@ namespace ProjectODataServer.Controllers.OData
 		[EnableQuery]
 		public SingleResult<Category> GetCategory(int key, ODataQueryOptions<Product> options)
 		{
-			return SingleResult<Category>.Create(_db.Set<Product>().Include(x=>x.Category).Where(x => x.Id == key).Select(x=>x.Category));
+			return SingleResult<Category>.Create(_db.Set<Product>().Include(x => x.Category).Where(x => x.Id == key).Select(x => x.Category));
+		}
+
+
+
+		[HttpPost]
+		public IActionResult Post([FromBody] Product item)
+		{
+			_db.Set<Product>().Add(item);
+
+			_db.SaveChanges();
+
+			return StatusCode(201, item);
 		}
 	}
 }

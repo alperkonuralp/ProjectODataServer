@@ -1,0 +1,19 @@
+
+GET https://localhost:5001/odata/category
+
+
+
+###
+
+GET https://localhost:5001/odata/category?$expand=products
+
+
+
+###
+
+POST https://localhost:5001/odata/category 
+Content-Type: application/json
+
+{
+    "Name": "Deneme 1"
+}
