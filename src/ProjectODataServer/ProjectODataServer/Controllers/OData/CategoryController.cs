@@ -2,6 +2,7 @@
 using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Sample.Data.DbContexts;
 using Sample.Data.Entities;
 using System.Linq;
@@ -10,23 +11,33 @@ namespace ProjectODataServer.Controllers.OData
 {
 	public class CategoryController : ControllerBase
 	{
+		private readonly ILogger _logger;
 		private readonly SampleDataDbContext _db;
+		private readonly IDateTimeService _dateTimeService;
 
-		public CategoryController(SampleDataDbContext db)
+		public CategoryController(SampleDataDbContext db, ILogger<CategoryController> logger, IDateTimeService dateTimeService)
 		{
 			_db = db;
+			_logger = logger;
+			_dateTimeService = dateTimeService;
 		}
+
 
 		[EnableQuery]
 		public IQueryable<Category> Get(ODataQueryOptions<Category> options)
 		{
+			var now = _dateTimeService.Now();
 			return _db.Categories;
 		}
 
 		[EnableQuery]
 		public IActionResult Get(int key, ODataQueryOptions<Category> options)
 		{
-			if (!_db.Set<Category>().Any(x => x.Id == key)) return NotFound();
+			if (!_db.Set<Category>().Any(x => x.Id == key))
+			{
+				_logger.LogError($"The key ({key}) isn't found in the Category table.");
+				return NotFound();
+			}
 			return Ok(SingleResult<Category>.Create(_db.Set<Category>().Where(x => x.Id == key)));
 		}
 
