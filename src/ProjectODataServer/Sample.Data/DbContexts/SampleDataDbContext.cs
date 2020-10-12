@@ -21,6 +21,12 @@ namespace Sample.Data.DbContexts
 
 			modelBuilder.ApplyConfiguration(new CategoryMapping());
 			modelBuilder.ApplyConfiguration(new ProductMapping());
+			modelBuilder.ApplyConfiguration(new OperationMapping());
+			modelBuilder.ApplyConfiguration(new TollOperationMapping());
+			modelBuilder.ApplyConfiguration(new AccidentOperationMapping());
+			modelBuilder.ApplyConfiguration(new TrafficPenaltyOperationMapping());
+			modelBuilder.ApplyConfiguration(new TireOperationMapping());
+			modelBuilder.ApplyConfiguration(new WinterTireOperationMapping());
 		}
 	}
 }

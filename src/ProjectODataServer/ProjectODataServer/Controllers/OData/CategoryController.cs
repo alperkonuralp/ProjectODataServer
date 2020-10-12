@@ -13,20 +13,16 @@ namespace ProjectODataServer.Controllers.OData
 	{
 		private readonly ILogger _logger;
 		private readonly SampleDataDbContext _db;
-		private readonly IDateTimeService _dateTimeService;
 
-		public CategoryController(SampleDataDbContext db, ILogger<CategoryController> logger, IDateTimeService dateTimeService)
+		public CategoryController(SampleDataDbContext db, ILogger<CategoryController> logger)
 		{
 			_db = db;
 			_logger = logger;
-			_dateTimeService = dateTimeService;
 		}
-
 
 		[EnableQuery]
 		public IQueryable<Category> Get(ODataQueryOptions<Category> options)
 		{
-			var now = _dateTimeService.Now();
 			return _db.Categories;
 		}
 
