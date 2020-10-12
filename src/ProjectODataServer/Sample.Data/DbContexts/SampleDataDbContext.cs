@@ -14,6 +14,14 @@ namespace Sample.Data.DbContexts
 		public DbSet<Category> Categories { get; set; }
 		
 		public DbSet<Product> Products { get; set; }
+		public DbSet<Operation> Operations { get; set; }
+		public DbSet<AccidentOperation> AccidentOperations { get; set; }
+		public DbSet<TireOperation> TireOperations { get; set; }
+		public DbSet<TollOperation> TollOperations { get; set; }
+		public DbSet<TrafficPenaltyOperation> TrafficPenaltyOperation { get; set; }
+		public DbSet<WinterTireOperation> WinterTireOperation { get; set; }
+
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -27,6 +35,7 @@ namespace Sample.Data.DbContexts
 			modelBuilder.ApplyConfiguration(new TrafficPenaltyOperationMapping());
 			modelBuilder.ApplyConfiguration(new TireOperationMapping());
 			modelBuilder.ApplyConfiguration(new WinterTireOperationMapping());
+			modelBuilder.ApplyConfiguration(new AccountMapping());
 		}
 	}
 }
