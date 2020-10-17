@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sample.Data.DbContexts;
 
 namespace Sample.Data.Migrations
 {
     [DbContext(typeof(SampleDataDbContext))]
-    partial class SampleDataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201017134533_NewHierarchy")]
+    partial class NewHierarchy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

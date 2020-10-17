@@ -17,10 +17,18 @@ namespace Sample.Data.DbContexts
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			base.OnModelCreating(modelBuilder);
+			modelBuilder.ApplyConfiguration(new VendorMapping());
 
 			modelBuilder.ApplyConfiguration(new CategoryMapping());
+			modelBuilder.ApplyConfiguration(new ShoppingCategoryMapping());
+			modelBuilder.ApplyConfiguration(new ServiceCategoryMapping());
+
 			modelBuilder.ApplyConfiguration(new ProductMapping());
+			modelBuilder.ApplyConfiguration(new ShoppingProductMapping());
+			modelBuilder.ApplyConfiguration(new ServiceProductMapping());
+
+
+			base.OnModelCreating(modelBuilder);
 		}
 	}
 }

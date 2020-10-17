@@ -41,13 +41,13 @@ namespace ProjectODataServer.Controllers.OData
 			return Ok(SingleResult<Category>.Create(_db.Set<Category>().Where(x => x.Id == key)));
 		}
 
-		[EnableQuery]
-		public IActionResult GetProducts(int key, ODataQueryOptions<Category> options)
-		{
-			if (!_db.Set<Category>().Any(x => x.Id == key)) return NotFound();
+		//[EnableQuery]
+		//public IActionResult GetProducts(int key, ODataQueryOptions<Category> options)
+		//{
+		//	if (!_db.Set<Category>().Any(x => x.Id == key)) return NotFound();
 
-			return Ok(_db.Set<Product>().Where(x => x.CategoryId == key));
-		}
+		//	return Ok(_db.Set<Product>().Where(x => x.CategoryId == key));
+		//}
 
 		[HttpPost]
 		public IActionResult Post([FromBody] Category item)

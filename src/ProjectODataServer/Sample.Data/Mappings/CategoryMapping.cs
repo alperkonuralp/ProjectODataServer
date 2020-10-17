@@ -15,14 +15,57 @@ namespace Sample.Data.Mappings
 				.HasColumnName("CategoryId")
 				.IsRequired();
 
+			builder.Property(x => x.CreatedAt)
+				.IsRequired();
+			builder.Property(x => x.CreatedBy)
+				.IsRequired();
+			builder.Property(x => x.ModifiedAt)
+				.IsRequired();
+			builder.Property(x => x.ModifiedBy)
+				.IsRequired();
+
+
 			builder.Property(x => x.Name)
 				.HasMaxLength(32)
 				.IsRequired();
 
-			builder.HasData(
-				new Category() { Id = 1, Name = "Yiyecek" },
-				new Category() { Id = 2, Name = "Kırtasiye" }
-				);
+			builder.HasDiscriminator<string>("CategoryType")
+				.HasValue<ShoppingCategory>("Shopping")
+				.HasValue<ServiceCategory>("Service");
+		}
+	}
+
+
+	public class ShoppingCategoryMapping : IEntityTypeConfiguration<ShoppingCategory>
+	{
+		public void Configure(EntityTypeBuilder<ShoppingCategory> builder)
+		{
+			builder.Property(m => m.ParentId)
+				.HasColumnName("ParentId")
+				.IsRequired(false);
+
+			builder.HasOne(m => m.Parent)
+				.WithMany(m => m.Children)
+				.HasForeignKey("ParentId")
+				.IsRequired(false)
+				;
+
+		}
+	}
+	public class ServiceCategoryMapping : IEntityTypeConfiguration<ServiceCategory>
+	{
+		public void Configure(EntityTypeBuilder<ServiceCategory> builder)
+		{
+			builder.Property(m => m.ParentId)
+				.HasColumnName("ParentId")
+				.IsRequired(false);
+
+			builder.HasOne(m => m.Parent)
+				.WithMany(m => m.Children)
+				.HasForeignKey("ParentId")
+				.IsRequired(false)
+				;
+
 		}
 	}
 }
