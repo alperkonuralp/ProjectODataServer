@@ -1,10 +1,12 @@
 # Project OData Server
 
 Asp.Net Core ile OData Sunucusu Projesi.  
-The OData Server Project With Asp.Net Core.
+The OData Server Project With Asp.Net Core.  
+Das OData Server-Projekt mit Asp.Net Core.  
+Le projet de serveur OData avec Asp.Net Core.
 
-Projemizin GitHub adresi | Out Project GitHub address : [github.com/alperkonuralp/ProjectODataServer](https://github.com/alperkonuralp/ProjectODataServer)  
-Youtube Kanalım | My Youtube Channel : [youtube.com/c/AlperKonuralp35](https://www.youtube.com/c/AlperKonuralp35)
+Projemizin GitHub adresi | Project GitHub address | Unsere Projekt-GitHub-Adresse | Adresse de notre projet GitHub : [github.com/alperkonuralp/ProjectODataServer](https://github.com/alperkonuralp/ProjectODataServer)  
+Youtube Kanalım | My Youtube Channel | Mein Kanal | Ma chaîne : [youtube.com/c/AlperKonuralp35](https://www.youtube.com/c/AlperKonuralp35)
 
 ## Video Bölümleri | Video Episodes
 
@@ -28,7 +30,6 @@ Değişiklik günlükleri [bu sayfada](docs/ChangeLogs.md).
 Change logs are in [this page](docs/ChangeLogs.md).  
 Änderungsprotokolle befinden sich in [dieser Seite](docs/ChangeLogs.md).  
 Les journaux des modifications sont dans [cette page](docs/ChangeLogs.md).
-
 
 ## Ne yapmak istiyorum | What I want to do | Was ich machen will; was ich vorhabe zu tun | Ce que je veux faire
 
