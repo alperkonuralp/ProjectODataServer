@@ -17,11 +17,15 @@ namespace ProjectODataServer
 			Container.Register(
 				Component.For<ILogManager>().Instance(LogManager),
 				Component.For<ODataServer>().Instance(this),
-				Component.For<IWindsorContainer>().Instance(Container),
-				Component.For<IDateTimeService>().ImplementedBy<DateTimeService>().LifestyleSingleton()
+				Component.For<IWindsorContainer>().Instance(Container)
 				);
 
 			Container.Install(FromAssembly.Containing<ODataServer>());
+		}
+
+		public void InstallFrom<T>()
+		{
+			Container.Install(FromAssembly.Containing<T>());
 		}
 	}
 }

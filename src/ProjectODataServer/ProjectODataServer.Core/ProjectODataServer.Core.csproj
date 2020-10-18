@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<RootNamespace>ProjectODataServer</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Castle.Core" Version="4.4.1" />
+		<PackageReference Include="Castle.Core-log4net" Version="4.4.1" />
+		<PackageReference Include="Castle.LoggingFacility" Version="5.0.1" />
+		<PackageReference Include="Castle.Windsor" Version="5.0.1" />
+		<PackageReference Include="log4net" Version="2.0.10" />
+		<PackageReference Include="MessagePack" Version="2.2.60" />
+		<PackageReference Include="MessagePackAnalyzer" Version="2.2.60" />
+		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.3" />
+		<PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+	</ItemGroup>
+</Project>

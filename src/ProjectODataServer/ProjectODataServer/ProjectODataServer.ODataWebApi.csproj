@@ -13,6 +13,9 @@
     <PackageReference Include="Castle.Windsor" Version="5.0.1" />
     <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.4.0" />
     <PackageReference Include="log4net" Version="2.0.10" />
+    <PackageReference Include="MessagePack" Version="2.2.60" />
+    <PackageReference Include="MessagePack.AspNetCoreMvcFormatter" Version="2.2.60" />
+    <PackageReference Include="MessagePackAnalyzer" Version="2.2.60" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.5.0" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0" />
@@ -27,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjectODataServer.Core\ProjectODataServer.Core.csproj" />
     <ProjectReference Include="..\Sample.Data\Sample.Data.csproj" />
   </ItemGroup>
 

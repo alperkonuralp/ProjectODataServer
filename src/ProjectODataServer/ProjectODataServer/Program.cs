@@ -15,6 +15,7 @@ namespace ProjectODataServer
 		{
 			LogManager = new LogManager(Path.GetDirectoryName(typeof(Program).Assembly.Location));
 			Server = new ODataServer(LogManager);
+			Server.InstallFrom<Program>();
 
 			CreateHostBuilder(args).Build().Run();
 		}

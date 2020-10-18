@@ -2,6 +2,8 @@ using Castle.MicroKernel.Lifestyle;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using MessagePack.AspNetCoreMvcFormatter;
+using MessagePack.Resolvers;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +40,13 @@ namespace ProjectODataServer
 
 			services.AddOptions();
 			services.AddControllers()
+				.AddMvcOptions(option =>
+				{
+					option.OutputFormatters.Clear();
+					option.OutputFormatters.Add(new MessagePackOutputFormatter(ContractlessStandardResolver.Options));
+					option.InputFormatters.Clear();
+					option.InputFormatters.Add(new MessagePackInputFormatter(ContractlessStandardResolver.Options));
+				})
 				;
 
 			services.AddOData();
