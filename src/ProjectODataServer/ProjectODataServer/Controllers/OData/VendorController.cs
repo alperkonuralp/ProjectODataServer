@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace ProjectODataServer.Controllers.OData
 {
-	public class CategoryController : ReadonlyEntityODataController<Category, int>
+	public class VendorController : ReadonlyEntityODataController<Vendor, int>
 	{
 		private readonly ILogger _logger;
 		private readonly SampleDataDbContext _db;
 
-		public CategoryController(SampleDataDbContext db, ILogger<CategoryController> logger, ILoggerFactory loggerFactory)
+		public VendorController(SampleDataDbContext db, ILogger<VendorController> logger, ILoggerFactory loggerFactory)
 			: base(db, loggerFactory)
 		{
 			_db = db;
@@ -23,15 +23,15 @@ namespace ProjectODataServer.Controllers.OData
 		//[EnableQuery]
 		//public IActionResult GetProducts(int key, ODataQueryOptions<Category> options)
 		//{
-		//	if (!_db.Set<Category>().Any(x => x.Id == key)) return NotFound();
+		//	if (!_db.Set<Vendor>().Any(x => x.Id == key)) return NotFound();
 
-		//	return Ok(_db.Set<Product>().Where(x => x.CategoryId == key));
+		//	return Ok(_db.Set<Product>().Where(x => x.VendorId == key));
 		//}
 
 		[HttpPost]
-		public IActionResult Post([FromBody] Category item)
+		public IActionResult Post([FromBody] Vendor item)
 		{
-			_db.Set<Category>().Add(item);
+			_db.Set<Vendor>().Add(item);
 
 			_db.SaveChanges();
 
@@ -39,9 +39,9 @@ namespace ProjectODataServer.Controllers.OData
 		}
 
 		[HttpPut]
-		public IActionResult Put([FromODataUri] int key, [FromBody] Category item)
+		public IActionResult Put([FromODataUri] int key, [FromBody] Vendor item)
 		{
-			var entity = _db.Set<Category>().Find(key);
+			var entity = _db.Set<Vendor>().Find(key);
 
 			if (entity == null) return NotFound();
 
@@ -56,9 +56,9 @@ namespace ProjectODataServer.Controllers.OData
 		}
 
 		[HttpPatch]
-		public IActionResult Patch([FromODataUri] int key, Delta<Category> item)
+		public IActionResult Patch([FromODataUri] int key, Delta<Vendor> item)
 		{
-			var entity = _db.Set<Category>().Find(key);
+			var entity = _db.Set<Vendor>().Find(key);
 
 			if (entity == null) return NotFound();
 
@@ -75,11 +75,11 @@ namespace ProjectODataServer.Controllers.OData
 		[HttpDelete]
 		public IActionResult Delete([FromODataUri] int key)
 		{
-			var entity = _db.Set<Category>().Find(key);
+			var entity = _db.Set<Vendor>().Find(key);
 
 			if (entity == null) return NotFound();
 
-			_db.Set<Category>().Remove(entity);
+			_db.Set<Vendor>().Remove(entity);
 
 			_db.SaveChanges();
 

@@ -11,9 +11,14 @@ namespace Sample.Data.DbContexts
 		{
 		}
 
+		public DbSet<Vendor> Vendors { get; set; }
 		public DbSet<Category> Categories { get; set; }
-		
+		public DbSet<ShoppingCategory> ShoppingCategories { get; set; }
+		public DbSet<ServiceCategory> ServiceCategories { get; set; }
+
 		public DbSet<Product> Products { get; set; }
+		public DbSet<ShoppingProduct> ShoppingProducts { get; set; }
+		public DbSet<ServiceProduct> ServiceProducts { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -26,7 +31,6 @@ namespace Sample.Data.DbContexts
 			modelBuilder.ApplyConfiguration(new ProductMapping());
 			modelBuilder.ApplyConfiguration(new ShoppingProductMapping());
 			modelBuilder.ApplyConfiguration(new ServiceProductMapping());
-
 
 			base.OnModelCreating(modelBuilder);
 		}

@@ -90,6 +90,8 @@ namespace ProjectODataServer
 		private IEdmModel GetEdmModel()
 		{
 			var odataBuilder = new ODataConventionModelBuilder();
+			odataBuilder.Namespace = "Sample";
+			odataBuilder.EntitySet<Vendor>("Vendor");
 			odataBuilder.EntitySet<Category>("Category");
 			odataBuilder.EntitySet<Product>("Product");
 
