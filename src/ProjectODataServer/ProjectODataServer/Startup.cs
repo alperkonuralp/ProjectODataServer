@@ -1,3 +1,4 @@
+using Castle.MicroKernel.Lifestyle;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OData.Edm;
+using ProjectODataServer.Services;
 using Sample.Data.DbContexts;
 using Sample.Data.Entities;
 using System.Linq;
@@ -19,7 +21,7 @@ namespace ProjectODataServer
 {
 	public class Startup
 	{
-		public IWindsorContainer Container { get; } 
+		public IWindsorContainer Container { get; }
 
 		public Startup(IConfiguration configuration)
 		{
@@ -40,7 +42,7 @@ namespace ProjectODataServer
 
 			services.AddOData();
 
-			services.AddDbContext<SampleDataDbContext>(c =>
+			services.AddDbContext<DbContext, SampleDataDbContext>(c =>
 				c
 				.EnableSensitiveDataLogging()
 				.EnableDetailedErrors()
@@ -49,10 +51,15 @@ namespace ProjectODataServer
 				);
 
 			Container.Register(
-				Component.For<IConfiguration>()
+				Component
+					.For<IConfiguration>()
 					.Instance(Configuration)
+				,
+				Component
+					.For(typeof(IODataService<,>))
+					.ImplementedBy(typeof(ODataEntityFrameworkService<,>))
+					.LifestyleScoped()
 				);
-
 
 			var installAssemblies = Configuration
 				.GetSection("InstallAssemblies")
@@ -67,6 +74,14 @@ namespace ProjectODataServer
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			app.Use(async (context, next) =>
+			{
+				using (Container.BeginScope())
+				{
+					await next();
+				}
+			});
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();

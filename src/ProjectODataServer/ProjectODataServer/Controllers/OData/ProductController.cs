@@ -10,13 +10,6 @@ namespace ProjectODataServer.Controllers.OData
 {
 	public class ProductController : ReadonlyEntityODataController<Product, int>
 	{
-		private readonly SampleDataDbContext _db;
-
-		public ProductController(SampleDataDbContext db, ILoggerFactory loggerFactory)
-			:base(db, loggerFactory)
-		{
-			_db = db;
-		}
 
 
 		//[EnableQuery]

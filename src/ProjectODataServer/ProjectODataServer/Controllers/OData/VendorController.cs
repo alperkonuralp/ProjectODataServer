@@ -1,25 +1,12 @@
 ﻿using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Sample.Data.DbContexts;
+using ProjectODataServer.Services;
 using Sample.Data.Entities;
-using System.Linq;
 
 namespace ProjectODataServer.Controllers.OData
 {
 	public class VendorController : ReadonlyEntityODataController<Vendor, int>
 	{
-		private readonly ILogger _logger;
-		private readonly SampleDataDbContext _db;
-
-		public VendorController(SampleDataDbContext db, ILogger<VendorController> logger, ILoggerFactory loggerFactory)
-			: base(db, loggerFactory)
-		{
-			_db = db;
-			_logger = logger;
-		}
-
 		//[EnableQuery]
 		//public IActionResult GetProducts(int key, ODataQueryOptions<Category> options)
 		//{
@@ -29,61 +16,27 @@ namespace ProjectODataServer.Controllers.OData
 		//}
 
 		[HttpPost]
-		public IActionResult Post([FromBody] Vendor item)
+		public IActionResult Post([FromBody] Vendor item, [FromServices] IODataService<Vendor, int> service)
 		{
-			_db.Set<Vendor>().Add(item);
-
-			_db.SaveChanges();
-
-			return StatusCode(201, item);
+			return service.Post(item);
 		}
 
 		[HttpPut]
-		public IActionResult Put([FromODataUri] int key, [FromBody] Vendor item)
+		public IActionResult Put([FromODataUri] int key, [FromBody] Vendor item, [FromServices] IODataService<Vendor, int> service)
 		{
-			var entity = _db.Set<Vendor>().Find(key);
-
-			if (entity == null) return NotFound();
-
-			if (entity.Name != item.Name) entity.Name = item.Name;
-
-			var a = _db.ChangeTracker.Entries();
-
-			if (a.Any(x => x.State == EntityState.Modified || x.State == EntityState.Added || x.State == EntityState.Deleted))
-				_db.SaveChanges();
-
-			return NoContent();
+			return service.Put(key, item);
 		}
 
 		[HttpPatch]
-		public IActionResult Patch([FromODataUri] int key, Delta<Vendor> item)
+		public IActionResult Patch([FromODataUri] int key, Delta<Vendor> item, [FromServices] IODataService<Vendor, int> service)
 		{
-			var entity = _db.Set<Vendor>().Find(key);
-
-			if (entity == null) return NotFound();
-
-			item.Patch(entity);
-
-			var a = _db.ChangeTracker.Entries();
-
-			if (a.Any(x => x.State == EntityState.Modified || x.State == EntityState.Added || x.State == EntityState.Deleted))
-				_db.SaveChanges();
-
-			return NoContent();
+			return service.Patch(key, item);
 		}
 
 		[HttpDelete]
-		public IActionResult Delete([FromODataUri] int key)
+		public IActionResult Delete([FromODataUri] int key, [FromServices] IODataService<Vendor, int> service)
 		{
-			var entity = _db.Set<Vendor>().Find(key);
-
-			if (entity == null) return NotFound();
-
-			_db.Set<Vendor>().Remove(entity);
-
-			_db.SaveChanges();
-
-			return Ok();
+			return service.Delete(key);
 		}
 	}
 }
