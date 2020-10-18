@@ -117,3 +117,47 @@ Content-Type: application/json
     },
     "Name": "Deneme Ürünü 3 F"
 }
+
+
+
+
+
+
+
+
+
+
+
+###
+
+POST https://localhost:5001/odata/vendor 
+Content-Type: application/json
+
+{
+    "Name": "Deneme 3"
+}
+
+
+
+###
+
+PUT https://localhost:5001/odata/vendor(10)
+Content-Type: application/json
+
+{
+    "Name": "Deneme 4"
+}
+
+
+###
+
+PUT https://localhost:5001/odata/vendor(10)
+Content-Type: application/json
+
+{
+    "Name": "Deneme 3",
+    "CreatedAt" : "2020-01-01T01:23:45.678+03:00",
+    "CreatedBy" : 10,
+    "ModifiedAt" : "2020-01-01T01:23:45.678+03:00",
+    "ModifiedBy" : 10
+}
