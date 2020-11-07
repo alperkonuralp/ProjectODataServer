@@ -7,34 +7,41 @@ namespace ProjectODataServer.Tests.Json
 {
 	public class MessagePackJsonSerializerTest
 	{
-		[Fact]
-		public void SerializeObject_WhenParamaterIsNull_ThenReturnStringHasNullTextValue()
+		[Theory]
+		[InlineData(null, "null")]
+		[InlineData("", "\"\"")]
+		[InlineData("abc", "\"abc\"")]
+		public void SerializeObject_WhenParamaterHasValue_ThenReturnStringHasNullTextValue(string request, string expected)
 		{
 			// Arrange
 			MessagePackJsonSerializer service = new MessagePackJsonSerializer();
 
 			// Act
-			var result = service.SerializeObject<string>(null);
+			var result = service.SerializeObject<string>(request);
 
 			// Assert
 			//Assert.Equal("null", result);
-			result.ShouldBe("null");
+			result.ShouldNotBeNull();
+			result.ShouldBe(expected);
 		}
 
-		[Fact]
-		public void SerializeObject_WhenParamaterHasIntValue_ThenReturnStringHasAIntegerTextValue()
+		[Theory]
+		[InlineData(5, "5")]
+		[InlineData(0, "0")]
+		[InlineData(100, "100")]
+		public void SerializeObject_WhenParamaterHasIntValue_ThenReturnStringHasAIntegerTextValue(int request, string expected)
 		{
 			// Arrange
 			MessagePackJsonSerializer service = new MessagePackJsonSerializer();
 
 			// Act
-			var result = service.SerializeObject<int>(5);
+			var result = service.SerializeObject<int>(request);
 
 			// Assert
 			//Assert.Equal("5", result);
 			result.ShouldNotBeNull();
 			result.ShouldNotBeEmpty();
-			result.ShouldBe("5");
+			result.ShouldBe(expected);
 			result.ShouldBeOfType<string>();
 		}
 
