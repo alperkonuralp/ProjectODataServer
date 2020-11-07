@@ -1,4 +1,6 @@
 ﻿using ProjectODataServer.Json;
+using Shouldly;
+using System;
 using Xunit;
 
 namespace ProjectODataServer.Tests.Json
@@ -8,27 +10,38 @@ namespace ProjectODataServer.Tests.Json
 		[Fact]
 		public void SerializeObject_WhenParamaterIsNull_ThenReturnStringHasNullTextValue()
 		{
+			// Arrange
 			MessagePackJsonSerializer service = new MessagePackJsonSerializer();
 
+			// Act
 			var result = service.SerializeObject<string>(null);
 
-			Assert.Equal("null", result);
+			// Assert
+			//Assert.Equal("null", result);
+			result.ShouldBe("null");
 		}
 
 		[Fact]
 		public void SerializeObject_WhenParamaterHasIntValue_ThenReturnStringHasAIntegerTextValue()
 		{
+			// Arrange
 			MessagePackJsonSerializer service = new MessagePackJsonSerializer();
 
+			// Act
 			var result = service.SerializeObject<int>(5);
 
-			Assert.Equal("5", result);
+			// Assert
+			//Assert.Equal("5", result);
+			result.ShouldNotBeNull();
+			result.ShouldNotBeEmpty();
+			result.ShouldBe("5");
+			result.ShouldBeOfType<string>();
 		}
-
 
 		[Fact]
 		public void SerializeObject_WhenParamaterIsInTestClassImplementation_ThenReturnStringHasAValue()
 		{
+			// Arrange
 			var obj = new TestClass()
 			{
 				Id = 5,
@@ -37,9 +50,26 @@ namespace ProjectODataServer.Tests.Json
 
 			MessagePackJsonSerializer service = new MessagePackJsonSerializer();
 
+			// Act
 			var result = service.SerializeObject(obj);
 
-			Assert.Equal("{\"id\":5,\"name\":\"Deneme\"}", result);
+			// Assert
+			//Assert.Equal("{\"Id\":5,\"Name\":\"Deneme\"}", result);
+			result.ShouldBe("{\"Id\":5,\"Name\":\"Deneme\"}");
+		}
+
+		[Fact]
+		public void DeserializeObject_WhenParameterIsNull_ThenThrowException()
+		{
+			// Arrange
+			MessagePackJsonSerializer service = new MessagePackJsonSerializer();
+
+			// Act
+			var result = Should.Throw<ArgumentNullException>(() => service.DeserializeObject<string>(null));
+
+			// Assert
+			result.ShouldNotBeNull();
+			result.ParamName.ShouldBe("json");
 		}
 
 		public class TestClass

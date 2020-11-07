@@ -1,4 +1,5 @@
 ﻿using MessagePack;
+using System;
 using System.Threading.Tasks;
 
 namespace ProjectODataServer.Json
@@ -17,6 +18,7 @@ namespace ProjectODataServer.Json
 
 		public T DeserializeObject<T>(string json)
 		{
+			if (json == null) throw new ArgumentNullException(nameof(json));
 			var a = MessagePackSerializer.ConvertFromJson(json, MessagePack.Resolvers.ContractlessStandardResolver.Options);
 			return MessagePackSerializer.Deserialize<T>(a, MessagePack.Resolvers.ContractlessStandardResolver.Options);
 		}
