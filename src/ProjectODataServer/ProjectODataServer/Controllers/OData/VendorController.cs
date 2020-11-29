@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectODataServer.Services;
 using ProjectODataServer.WebApi.Controllers;
 using Sample.Data.Entities;
+using System;
 
 namespace ProjectODataServer.Controllers.OData
 {
-	public class VendorController : ReadonlyEntityODataController<Vendor, int>
+	public class VendorController : EntityODataController<Vendor, int>
 	{
 		//[EnableQuery]
 		//public IActionResult GetProducts(int key, ODataQueryOptions<Vendor> options)
@@ -16,52 +17,12 @@ namespace ProjectODataServer.Controllers.OData
 		//	return Ok(_db.Set<Product>().Where(x => x.VendorId == key));
 		//}
 
-		[HttpPost]
-		public IActionResult Post([FromBody] Vendor item, [FromServices] IDataService<Vendor, int> service)
-		{
-			return new ObjectResult(service.Post(item)) { StatusCode = 201 };
-		}
+		protected override bool IsEnabledForPut => false;
+		protected override bool IsEnabledForPatch => false;
 
-		[HttpPut]
-		public IActionResult Put([FromODataUri] int key, [FromBody] Vendor item, [FromServices] IDataService<Vendor, int> service)
-		{
-			try
-			{
-				service.Put(key, item);
-				return new NoContentResult();
-			}
-			catch (NotFoundException)
-			{
-				return new NotFoundResult();
-			}
-		}
-
-		[HttpPatch]
-		public IActionResult Patch([FromODataUri] int key, Microsoft.AspNet.OData.Delta<Vendor> delta, [FromServices] IDataService<Vendor, int> service)
-		{
-			try
-			{
-				service.Patch(key, new ProjectODataServer.WebApi.Delta<Vendor>(delta));
-				return new NoContentResult();
-			}
-			catch (NotFoundException)
-			{
-				return new NotFoundResult();
-			}
-		}
-
-		[HttpDelete]
-		public IActionResult Delete([FromODataUri] int key, [FromServices] IDataService<Vendor, int> service)
-		{
-			try
-			{
-				service.Delete(key);
-				return new OkResult();
-			}
-			catch (NotFoundException)
-			{
-				return new NotFoundResult();
-			}
-		}
+		//public override IActionResult Patch([FromODataUri] int key, Delta<Vendor> delta, [FromServices] IDataService<Vendor, int> service)
+		//{
+		//	return NotFound();
+		//}
 	}
 }

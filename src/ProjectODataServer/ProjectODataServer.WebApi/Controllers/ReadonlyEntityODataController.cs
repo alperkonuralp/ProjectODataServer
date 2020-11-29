@@ -11,13 +11,13 @@ namespace ProjectODataServer.WebApi.Controllers
 		where TEntity : Entity<TKey>
 	{
 		[EnableQuery]
-		public IQueryable<TEntity> Get(ODataQueryOptions<TEntity> options, [FromServices] IDataService<TEntity, TKey> service)
+		public virtual IQueryable<TEntity> Get(ODataQueryOptions<TEntity> options, [FromServices] IDataService<TEntity, TKey> service)
 		{
 			return service.Get();
 		}
 
 		[EnableQuery]
-		public IActionResult Get(TKey key, ODataQueryOptions<TEntity> options, [FromServices] IDataService<TEntity, TKey> service)
+		public virtual IActionResult Get(TKey key, ODataQueryOptions<TEntity> options, [FromServices] IDataService<TEntity, TKey> service)
 		{
 			try
 			{
