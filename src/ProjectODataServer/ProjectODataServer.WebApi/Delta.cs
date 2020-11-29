@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ProjectODataServer.Controllers.OData
+namespace ProjectODataServer.WebApi
 {
 	public class Delta<TEntity> : IDelta<TEntity>
 		where TEntity : class

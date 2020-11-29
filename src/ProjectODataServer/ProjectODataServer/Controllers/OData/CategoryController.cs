@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using ProjectODataServer.Services;
+using ProjectODataServer.WebApi;
+using ProjectODataServer.WebApi.Controllers;
 using Sample.Data.Entities;
 
 namespace ProjectODataServer.Controllers.OData
@@ -40,7 +42,7 @@ namespace ProjectODataServer.Controllers.OData
 		{
 			try
 			{
-				service.Patch(key, new Delta<Category>(delta));
+				service.Patch(key, new ProjectODataServer.WebApi.Delta<Category>(delta));
 				return new NoContentResult();
 			}
 			catch (NotFoundException)

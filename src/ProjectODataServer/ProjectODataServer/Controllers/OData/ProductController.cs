@@ -1,17 +1,10 @@
-﻿using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Query;
-using Microsoft.AspNetCore.Mvc;
-using Sample.Data.DbContexts;
+﻿using ProjectODataServer.WebApi.Controllers;
 using Sample.Data.Entities;
-using System.Linq;
-using Microsoft.Extensions.Logging;
 
 namespace ProjectODataServer.Controllers.OData
 {
 	public class ProductController : ReadonlyEntityODataController<Product, int>
 	{
-
-
 		//[EnableQuery]
 		//public IActionResult GetCategory(int key, ODataQueryOptions<Product> options)
 		//{
@@ -63,7 +56,6 @@ namespace ProjectODataServer.Controllers.OData
 
 		//	return NoContent();
 		//}
-
 
 		//[HttpPatch]
 		//public IActionResult Patch([FromODataUri] int key, Delta<Product> item)

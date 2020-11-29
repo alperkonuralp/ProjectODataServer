@@ -1,21 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>d2c884f1-a2b0-4267-ae79-1ee3b7c2eee5</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjectODataServer.Core\ProjectODataServer.Core.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.1" />
-    <PackageReference Include="Castle.Core-log4net" Version="4.4.1" />
     <PackageReference Include="Castle.LoggingFacility" Version="5.0.1" />
     <PackageReference Include="Castle.Windsor" Version="5.0.1" />
-    <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.4.0" />
-    <PackageReference Include="log4net" Version="2.0.10" />
-    <PackageReference Include="MessagePack" Version="2.2.60" />
-    <PackageReference Include="MessagePack.AspNetCoreMvcFormatter" Version="2.2.60" />
-    <PackageReference Include="MessagePackAnalyzer" Version="2.2.60" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.5.0" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0" />
@@ -28,12 +25,5 @@
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ProjectODataServer.Core\ProjectODataServer.Core.csproj" />
-    <ProjectReference Include="..\ProjectODataServer.WebApi\ProjectODataServer.WebApi.csproj" />
-    <ProjectReference Include="..\Sample.Data\Sample.Data.csproj" />
-  </ItemGroup>
-
 
 </Project>

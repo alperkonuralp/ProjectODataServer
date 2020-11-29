@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Mvc;
+using ProjectODataServer.Entities;
 using ProjectODataServer.Services;
-using Sample.Data.Entities;
 using System.Linq;
 
-namespace ProjectODataServer.Controllers.OData
+namespace ProjectODataServer.WebApi.Controllers
 {
 	public abstract class ReadonlyEntityODataController<TEntity, TKey> : ControllerBase
 		where TEntity : Entity<TKey>

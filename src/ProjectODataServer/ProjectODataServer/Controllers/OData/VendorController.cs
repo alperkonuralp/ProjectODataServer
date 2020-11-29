@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using ProjectODataServer.Services;
+using ProjectODataServer.WebApi.Controllers;
 using Sample.Data.Entities;
 
 namespace ProjectODataServer.Controllers.OData
@@ -8,7 +9,7 @@ namespace ProjectODataServer.Controllers.OData
 	public class VendorController : ReadonlyEntityODataController<Vendor, int>
 	{
 		//[EnableQuery]
-		//public IActionResult GetProducts(int key, ODataQueryOptions<Category> options)
+		//public IActionResult GetProducts(int key, ODataQueryOptions<Vendor> options)
 		//{
 		//	if (!_db.Set<Vendor>().Any(x => x.Id == key)) return NotFound();
 
@@ -16,27 +17,51 @@ namespace ProjectODataServer.Controllers.OData
 		//}
 
 		[HttpPost]
-		public IActionResult Post([FromBody] Vendor item, [FromServices] IODataService<Vendor, int> service)
+		public IActionResult Post([FromBody] Vendor item, [FromServices] IDataService<Vendor, int> service)
 		{
-			return service.Post(item);
+			return new ObjectResult(service.Post(item)) { StatusCode = 201 };
 		}
 
 		[HttpPut]
-		public IActionResult Put([FromODataUri] int key, [FromBody] Vendor item, [FromServices] IODataService<Vendor, int> service)
+		public IActionResult Put([FromODataUri] int key, [FromBody] Vendor item, [FromServices] IDataService<Vendor, int> service)
 		{
-			return service.Put(key, item);
+			try
+			{
+				service.Put(key, item);
+				return new NoContentResult();
+			}
+			catch (NotFoundException)
+			{
+				return new NotFoundResult();
+			}
 		}
 
 		[HttpPatch]
-		public IActionResult Patch([FromODataUri] int key, Microsoft.AspNet.OData.Delta<Vendor> item, [FromServices] IODataService<Vendor, int> service)
+		public IActionResult Patch([FromODataUri] int key, Microsoft.AspNet.OData.Delta<Vendor> delta, [FromServices] IDataService<Vendor, int> service)
 		{
-			return service.Patch(key, item);
+			try
+			{
+				service.Patch(key, new ProjectODataServer.WebApi.Delta<Vendor>(delta));
+				return new NoContentResult();
+			}
+			catch (NotFoundException)
+			{
+				return new NotFoundResult();
+			}
 		}
 
 		[HttpDelete]
-		public IActionResult Delete([FromODataUri] int key, [FromServices] IODataService<Vendor, int> service)
+		public IActionResult Delete([FromODataUri] int key, [FromServices] IDataService<Vendor, int> service)
 		{
-			return service.Delete(key);
+			try
+			{
+				service.Delete(key);
+				return new OkResult();
+			}
+			catch (NotFoundException)
+			{
+				return new NotFoundResult();
+			}
 		}
 	}
 }

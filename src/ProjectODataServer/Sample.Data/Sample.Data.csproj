@@ -21,6 +21,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProjectODataServer.Core\ProjectODataServer.Core.csproj" />
+    <ProjectReference Include="..\ProjectODataServer.EF\ProjectODataServer.EF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

@@ -63,11 +63,6 @@ namespace ProjectODataServer
 				Component
 					.For<IConfiguration>()
 					.Instance(Configuration)
-				,
-				Component
-					.For(typeof(IODataService<,>))
-					.ImplementedBy(typeof(ODataEntityFrameworkService<,>))
-					.LifestyleScoped()
 				);
 
 			var installAssemblies = Configuration
