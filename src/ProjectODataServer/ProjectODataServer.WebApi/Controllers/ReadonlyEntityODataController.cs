@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using ProjectODataServer.Entities;
 using ProjectODataServer.Services;
@@ -16,6 +17,7 @@ namespace ProjectODataServer.WebApi.Controllers
 			return service.Get();
 		}
 
+		[HttpGet]
 		[EnableQuery]
 		public virtual IActionResult Get(TKey key, ODataQueryOptions<TEntity> options, [FromServices] IDataService<TEntity, TKey> service)
 		{

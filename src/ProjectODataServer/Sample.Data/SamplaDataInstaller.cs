@@ -4,6 +4,7 @@ using Castle.Windsor;
 using ProjectODataServer.EF.Services;
 using ProjectODataServer.Services;
 using Sample.Data.Entities;
+using Sample.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -46,10 +47,9 @@ namespace Sample.Data
 					.LifestyleScoped()
 				,
 				Component
-					.For<IDataService<Vendor, int>>()
-					.ImplementedBy<DataEntityFrameworkService<Vendor, int>>()
+					.For<IDataService<Vendor, int>, IVendorDataService>()
+					.ImplementedBy<VendorDataService>()
 					.LifestyleScoped()
-
 
 				);
 		}
