@@ -11,15 +11,22 @@ namespace ProjectODataServer.Controllers.OData
 		where TEntity : Entity<TKey>
 	{
 		[EnableQuery]
-		public IQueryable<TEntity> Get(ODataQueryOptions<TEntity> options, [FromServices] IODataService<TEntity, TKey> service)
+		public IQueryable<TEntity> Get(ODataQueryOptions<TEntity> options, [FromServices] IDataService<TEntity, TKey> service)
 		{
-			return service.Get(options);
+			return service.Get();
 		}
 
 		[EnableQuery]
-		public IActionResult Get(TKey key, ODataQueryOptions<TEntity> options, [FromServices] IODataService<TEntity, TKey> service)
+		public IActionResult Get(TKey key, ODataQueryOptions<TEntity> options, [FromServices] IDataService<TEntity, TKey> service)
 		{
-			return service.Get(key, options);
+			try
+			{
+				return new OkObjectResult(SingleResult<TEntity>.Create(service.Get(key)));
+			}
+			catch (NotFoundException)
+			{
+				return new NotFoundResult();
+			}
 		}
 	}
 }

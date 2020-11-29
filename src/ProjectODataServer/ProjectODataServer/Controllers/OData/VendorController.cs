@@ -28,7 +28,7 @@ namespace ProjectODataServer.Controllers.OData
 		}
 
 		[HttpPatch]
-		public IActionResult Patch([FromODataUri] int key, Delta<Vendor> item, [FromServices] IODataService<Vendor, int> service)
+		public IActionResult Patch([FromODataUri] int key, Microsoft.AspNet.OData.Delta<Vendor> item, [FromServices] IODataService<Vendor, int> service)
 		{
 			return service.Patch(key, item);
 		}

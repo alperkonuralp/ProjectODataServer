@@ -16,27 +16,51 @@ namespace ProjectODataServer.Controllers.OData
 		//}
 
 		[HttpPost]
-		public IActionResult Post([FromBody] Category item, [FromServices] IODataService<Category, int> service)
+		public IActionResult Post([FromBody] Category item, [FromServices] IDataService<Category, int> service)
 		{
-			return service.Post(item);
+			return new ObjectResult(service.Post(item)) { StatusCode = 201 };
 		}
 
 		[HttpPut]
-		public IActionResult Put([FromODataUri] int key, [FromBody] Category item, [FromServices] IODataService<Category, int> service)
+		public IActionResult Put([FromODataUri] int key, [FromBody] Category item, [FromServices] IDataService<Category, int> service)
 		{
-			return service.Put(key, item);
+			try
+			{
+				service.Put(key, item);
+				return new NoContentResult();
+			}
+			catch (NotFoundException)
+			{
+				return new NotFoundResult();
+			}
 		}
 
 		[HttpPatch]
-		public IActionResult Patch([FromODataUri] int key, Delta<Category> item, [FromServices] IODataService<Category, int> service)
+		public IActionResult Patch([FromODataUri] int key, Microsoft.AspNet.OData.Delta<Category> delta, [FromServices] IDataService<Category, int> service)
 		{
-			return service.Patch(key, item);
+			try
+			{
+				service.Patch(key, new Delta<Category>(delta));
+				return new NoContentResult();
+			}
+			catch (NotFoundException)
+			{
+				return new NotFoundResult();
+			}
 		}
 
 		[HttpDelete]
-		public IActionResult Delete([FromODataUri] int key, [FromServices] IODataService<Category, int> service)
+		public IActionResult Delete([FromODataUri] int key, [FromServices] IDataService<Category, int> service)
 		{
-			return service.Delete(key);
+			try
+			{
+				service.Delete(key);
+				return new OkResult();
+			}
+			catch (NotFoundException)
+			{
+				return new NotFoundResult();
+			}
 		}
 	}
 }
