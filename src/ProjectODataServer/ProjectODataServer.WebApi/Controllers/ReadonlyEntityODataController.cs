@@ -35,14 +35,13 @@ namespace ProjectODataServer.WebApi.Controllers
 			IDataService<TEntity, TKey> dataService,
 			Func<TEntity, TResult> expression)
 		{
-			var item = dataService.Get(key).Select(expression);
-			if (!item.Any()) return NotFound();
-			return Ok(item.FirstOrDefault());
+			return GetSubProperty<TEntity, TKey, TResult>(key, dataService, expression);
 		}
+
 		protected IActionResult GetSubProperty<TSubEntity, TSubKey, TResult>(TSubKey key,
 			IDataService<TSubEntity, TSubKey> dataService,
 			Func<TSubEntity, TResult> expression)
-			where TSubEntity: Entity<TSubKey>
+			where TSubEntity : Entity<TSubKey>
 		{
 			var item = dataService.Get(key).Select(expression);
 			if (!item.Any()) return NotFound();

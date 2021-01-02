@@ -9,27 +9,37 @@ namespace ProjectODataServer.Controllers.OData
 {
 	public class ProductController : SampleControllerBase<Product, int>
 	{
+		#region Product
+
 		[HttpGet]
-		public IActionResult GetName(int key, ODataQueryOptions<Product> options, [FromServices] IDataService<Product, int> dataService)
+		public IActionResult GetName(int key,
+															 ODataQueryOptions<Product> options,
+															 [FromServices] IDataService<Product, int> dataService)
 		{
 			return GetProperty(key, dataService, x => x.Name);
 		}
 
 		[HttpGet]
-		public IActionResult GetUnitPrice(int key, ODataQueryOptions<Product> options, [FromServices] IDataService<Product, int> dataService)
+		public IActionResult GetUnitPrice(int key,
+																		ODataQueryOptions<Product> options,
+																		[FromServices] IDataService<Product, int> dataService)
 		{
 			return GetProperty(key, dataService, x => x.UnitPrice);
 		}
 
 		[HttpGet]
-		public IActionResult GetVendorId(int key, ODataQueryOptions<Product> options, [FromServices] IDataService<Product, int> dataService)
+		public IActionResult GetVendorId(int key,
+																	 ODataQueryOptions<Product> options,
+																	 [FromServices] IDataService<Product, int> dataService)
 		{
 			return GetProperty(key, dataService, x => x.VendorId);
 		}
 
 		[HttpGet]
 		[EnableQuery]
-		public IActionResult GetVendor(int key, ODataQueryOptions<Product> options, [FromServices] IDataService<Product, int> dataService)
+		public IActionResult GetVendor(int key,
+			ODataQueryOptions<Product> options,
+			[FromServices] IDataService<Product, int> dataService)
 		{
 			try
 			{
@@ -44,21 +54,67 @@ namespace ProjectODataServer.Controllers.OData
 			}
 		}
 
+		#endregion Product
+
+		#region ServiceProduct
+
+		[HttpGet]
+		public IActionResult GetDescriptionFromServiceProduct(int key,
+																												ODataQueryOptions<Product> options,
+																												[FromServices] IDataService<ServiceProduct, int> dataService)
+		{
+			return GetSubProperty(key, dataService, x => x.Description);
+		}
+
+		[HttpGet]
+		public IActionResult GetLongDescriptionFromServiceProduct(int key,
+																												ODataQueryOptions<Product> options,
+																												[FromServices] IDataService<ServiceProduct, int> dataService)
+		{
+			return GetSubProperty(key, dataService, x => x.LongDescription);
+		}
+
+		[HttpGet]
+		public IActionResult GetUnitTypeFromServiceProduct(int key,
+																												ODataQueryOptions<Product> options,
+																												[FromServices] IDataService<ServiceProduct, int> dataService)
+		{
+			return GetSubProperty(key, dataService, x => x.UnitType);
+		}
+
+		[HttpGet]
+		public IActionResult GetCategoryIdFromServiceProduct(int key,
+																												ODataQueryOptions<Product> options,
+																												[FromServices] IDataService<ServiceProduct, int> dataService)
+		{
+			return GetSubProperty(key, dataService, x => x.CategoryId);
+		}
 
 
+		[HttpGet]
+		[EnableQuery]
+		public IActionResult GetCategoryFromServiceProduct(int key,
+																										 ODataQueryOptions<Product> options,
+																										 [FromServices] IDataService<ServiceProduct, int> dataService)
+		{
+			try
+			{
+				var item = dataService.Get(key).Select(x => x.Category);
+				if (!item.Any()) return NotFound();
+
+				return Ok(SingleResult.Create(item));
+			}
+			catch (NotFoundException)
+			{
+				return NotFound();
+			}
+		}
 
 
 
 		[EnableQuery]
 		public IActionResult GetFromServiceProduct(ODataQueryOptions<Product> options,
 																						 [FromServices] IDataService<ServiceProduct, int> dataService)
-		{
-			return Ok(dataService.Get());
-		}
-
-		[EnableQuery]
-		public IActionResult GetFromShoppingProduct(ODataQueryOptions<Product> options,
-																							[FromServices] IDataService<ShoppingProduct, int> dataService)
 		{
 			return Ok(dataService.Get());
 		}
@@ -78,6 +134,27 @@ namespace ProjectODataServer.Controllers.OData
 			}
 		}
 
+
+
+		#endregion ServiceProduct
+
+		#region ShoppingProduct
+
+		[HttpGet]
+		public IActionResult GetDescriptionFromShoppingProduct(int key,
+																												 ODataQueryOptions<Product> options,
+																												 [FromServices] IDataService<ShoppingProduct, int> dataShopping)
+		{
+			return GetSubProperty(key, dataShopping, x => x.Description);
+		}
+
+		[EnableQuery]
+		public IActionResult GetFromShoppingProduct(ODataQueryOptions<Product> options,
+																							[FromServices] IDataService<ShoppingProduct, int> dataService)
+		{
+			return Ok(dataService.Get());
+		}
+
 		[EnableQuery]
 		public IActionResult GetShoppingProduct(int key,
 																					ODataQueryOptions<Product> options,
@@ -92,6 +169,58 @@ namespace ProjectODataServer.Controllers.OData
 				return NotFound();
 			}
 		}
+
+
+
+		[HttpGet]
+		public IActionResult GetShortDescriptionFromShoppingProduct(int key,
+																												 ODataQueryOptions<Product> options,
+																												 [FromServices] IDataService<ShoppingProduct, int> dataShopping)
+		{
+			return GetSubProperty(key, dataShopping, x => x.ShortDescription);
+		}
+
+		[HttpGet]
+		public IActionResult GetUnitTypeFromShoppingProduct(int key,
+																												 ODataQueryOptions<Product> options,
+																												 [FromServices] IDataService<ShoppingProduct, int> dataShopping)
+		{
+			return GetSubProperty(key, dataShopping, x => x.UnitType);
+		}
+
+
+		[HttpGet]
+		public IActionResult GetCategoryIdFromShoppingProduct(int key,
+																												 ODataQueryOptions<Product> options,
+																												 [FromServices] IDataService<ShoppingProduct, int> dataShopping)
+		{
+			return GetSubProperty(key, dataShopping, x => x.CategoryId);
+		}
+
+
+
+
+		[HttpGet]
+		[EnableQuery]
+		public IActionResult GetCategoryFromShoppingProduct(int key,
+																										 ODataQueryOptions<Product> options,
+																										 [FromServices] IDataService<ShoppingProduct, int> dataService)
+		{
+			try
+			{
+				var item = dataService.Get(key).Select(x => x.Category);
+				if (!item.Any()) return NotFound();
+
+				return Ok(SingleResult.Create(item));
+			}
+			catch (NotFoundException)
+			{
+				return NotFound();
+			}
+		}
+
+
+		#endregion ShoppingProduct
 
 		//[EnableQuery]
 		//public IActionResult GetCategory(int key, ODataQueryOptions<Product> options)
