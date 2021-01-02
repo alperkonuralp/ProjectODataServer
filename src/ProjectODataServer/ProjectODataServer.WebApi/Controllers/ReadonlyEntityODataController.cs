@@ -39,5 +39,14 @@ namespace ProjectODataServer.WebApi.Controllers
 			if (!item.Any()) return NotFound();
 			return Ok(item.FirstOrDefault());
 		}
+		protected IActionResult GetSubProperty<TSubEntity, TSubKey, TResult>(TSubKey key,
+			IDataService<TSubEntity, TSubKey> dataService,
+			Func<TSubEntity, TResult> expression)
+			where TSubEntity: Entity<TSubKey>
+		{
+			var item = dataService.Get(key).Select(expression);
+			if (!item.Any()) return NotFound();
+			return Ok(item.FirstOrDefault());
+		}
 	}
 }

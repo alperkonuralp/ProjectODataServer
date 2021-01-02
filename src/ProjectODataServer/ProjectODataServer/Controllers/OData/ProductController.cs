@@ -44,6 +44,55 @@ namespace ProjectODataServer.Controllers.OData
 			}
 		}
 
+
+
+
+
+
+		[EnableQuery]
+		public IActionResult GetFromServiceProduct(ODataQueryOptions<Product> options,
+																						 [FromServices] IDataService<ServiceProduct, int> dataService)
+		{
+			return Ok(dataService.Get());
+		}
+
+		[EnableQuery]
+		public IActionResult GetFromShoppingProduct(ODataQueryOptions<Product> options,
+																							[FromServices] IDataService<ShoppingProduct, int> dataService)
+		{
+			return Ok(dataService.Get());
+		}
+
+		[EnableQuery]
+		public IActionResult GetServiceProduct(int key,
+																				 ODataQueryOptions<Product> options,
+																				 [FromServices] IDataService<ServiceProduct, int> dataService)
+		{
+			try
+			{
+				return Ok(SingleResult.Create(dataService.Get(key)));
+			}
+			catch (NotFoundException)
+			{
+				return NotFound();
+			}
+		}
+
+		[EnableQuery]
+		public IActionResult GetShoppingProduct(int key,
+																					ODataQueryOptions<Product> options,
+																					[FromServices] IDataService<ShoppingProduct, int> dataService)
+		{
+			try
+			{
+				return Ok(SingleResult.Create(dataService.Get(key)));
+			}
+			catch (NotFoundException)
+			{
+				return NotFound();
+			}
+		}
+
 		//[EnableQuery]
 		//public IActionResult GetCategory(int key, ODataQueryOptions<Product> options)
 		//{
