@@ -6,6 +6,8 @@ using MessagePack.AspNetCoreMvcFormatter;
 using MessagePack.Resolvers;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.CodeAnalysis;
@@ -15,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OData.Edm;
 using ProjectODataServer.Services;
+using ProjectODataServer.WebApi;
 using Sample.Data.DbContexts;
 using Sample.Data.Entities;
 using System.Linq;
@@ -102,14 +105,23 @@ namespace ProjectODataServer
 				endpoints.MapControllers();
 
 				endpoints.Select().Filter().OrderBy().Count().MaxTop(100).Expand();
-				endpoints.MapODataRoute("odata", "odata", GetEdmModel());
+
+				// Create the default collection of built-in conventions.
+				var conventions = ODataRoutingConventions.CreateDefault();
+
+				// Insert the custom convention at the start of the collection.
+				conventions.Insert(0, new NavigationIndexRoutingConvention());
+
+				endpoints.MapODataRoute("odata", "odata", GetEdmModel(), new DefaultODataPathHandler(), conventions);
 			});
 		}
 
 		private IEdmModel GetEdmModel()
 		{
-			var odataBuilder = new ODataConventionModelBuilder();
-			odataBuilder.Namespace = "Sample";
+			var odataBuilder = new ODataConventionModelBuilder
+			{
+				Namespace = "Sample"
+			};
 			odataBuilder.EntitySet<Vendor>("Vendor");
 			odataBuilder.EntitySet<Category>("Category");
 			odataBuilder.EntitySet<Product>("Product");
@@ -117,4 +129,5 @@ namespace ProjectODataServer
 			return odataBuilder.GetEdmModel();
 		}
 	}
+
 }

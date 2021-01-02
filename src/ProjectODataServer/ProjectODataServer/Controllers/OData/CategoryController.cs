@@ -113,6 +113,20 @@ namespace ProjectODataServer.Controllers.OData
 			return Ok(dataService.Get());
 		}
 
+
+		[EnableQuery]
+		public IActionResult GetWithCategoryFromShoppingCategory(int key,
+																													 int relatedKey,
+																													 ODataQueryOptions<Category> options,
+																													 [FromServices] IDataService<ShoppingCategory, int> dataService)
+		{
+			var items = dataService.Get(key).Where(x => x.ParentId == relatedKey);
+			if (!items.Any()) return NotFound();
+
+			return Ok(SingleResult.Create(items));
+		}
+
+
 		[EnableQuery]
 		public IActionResult GetShoppingCategory(int key,
 																					 ODataQueryOptions<Category> options,

@@ -38,8 +38,8 @@ namespace ProjectODataServer.Controllers.OData
 		[HttpGet]
 		[EnableQuery]
 		public IActionResult GetVendor(int key,
-			ODataQueryOptions<Product> options,
-			[FromServices] IDataService<Product, int> dataService)
+																 ODataQueryOptions<Product> options,
+																 [FromServices] IDataService<Product, int> dataService)
 		{
 			try
 			{
@@ -53,6 +53,27 @@ namespace ProjectODataServer.Controllers.OData
 				return NotFound();
 			}
 		}
+
+
+		[HttpGet]
+		[EnableQuery]
+		public IActionResult GetWithVendor(int key, int relatedKey,
+																		 ODataQueryOptions<Product> options,
+																		 [FromServices] IDataService<Product, int> dataService)
+		{
+			try
+			{
+				var item = dataService.Get(key).Where(x=>x.VendorId == relatedKey);
+				if (!item.Any()) return NotFound();
+
+				return Ok(SingleResult.Create(item));
+			}
+			catch (NotFoundException)
+			{
+				return NotFound();
+			}
+		}
+
 
 		#endregion Product
 
