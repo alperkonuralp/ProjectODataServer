@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectODataServer.Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectODataServer.EF", "ProjectODataServer.EF\ProjectODataServer.EF.csproj", "{39305B56-CA22-4071-93F6-D51FF68D0C0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectODataServer.WebApi", "ProjectODataServer.WebApi\ProjectODataServer.WebApi.csproj", "{D0E33A23-E940-4DF2-A71C-D23BC7B03E5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectODataServer.WebApi", "ProjectODataServer.WebApi\ProjectODataServer.WebApi.csproj", "{D0E33A23-E940-4DF2-A71C-D23BC7B03E5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectODataServer.InterfaceTests", "ProjectODataServer.InterfaceTests\ProjectODataServer.InterfaceTests.csproj", "{6B86721D-D814-41DA-A9E5-B73364659A2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{D0E33A23-E940-4DF2-A71C-D23BC7B03E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0E33A23-E940-4DF2-A71C-D23BC7B03E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0E33A23-E940-4DF2-A71C-D23BC7B03E5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B86721D-D814-41DA-A9E5-B73364659A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B86721D-D814-41DA-A9E5-B73364659A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B86721D-D814-41DA-A9E5-B73364659A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B86721D-D814-41DA-A9E5-B73364659A2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
