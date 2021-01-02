@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
-using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using ProjectODataServer.Entities;
 using ProjectODataServer.Services;
+using System;
 using System.Linq;
 
 namespace ProjectODataServer.WebApi.Controllers
@@ -29,6 +29,15 @@ namespace ProjectODataServer.WebApi.Controllers
 			{
 				return new NotFoundResult();
 			}
+		}
+
+		protected IActionResult GetProperty<TResult>(TKey key,
+			IDataService<TEntity, TKey> dataService,
+			Func<TEntity, TResult> expression)
+		{
+			var item = dataService.Get(key).Select(expression);
+			if (!item.Any()) return NotFound();
+			return Ok(item.FirstOrDefault());
 		}
 	}
 }

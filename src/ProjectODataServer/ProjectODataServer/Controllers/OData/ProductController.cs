@@ -1,10 +1,49 @@
-﻿using ProjectODataServer.WebApi.Controllers;
+﻿using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Query;
+using Microsoft.AspNetCore.Mvc;
+using ProjectODataServer.Services;
 using Sample.Data.Entities;
+using System.Linq;
 
 namespace ProjectODataServer.Controllers.OData
 {
-	public class ProductController : ReadonlyEntityODataController<Product, int>
+	public class ProductController : SampleControllerBase<Product, int>
 	{
+		[HttpGet]
+		public IActionResult GetName(int key, ODataQueryOptions<Product> options, [FromServices] IDataService<Product, int> dataService)
+		{
+			return GetProperty(key, dataService, x => x.Name);
+		}
+
+		[HttpGet]
+		public IActionResult GetUnitPrice(int key, ODataQueryOptions<Product> options, [FromServices] IDataService<Product, int> dataService)
+		{
+			return GetProperty(key, dataService, x => x.UnitPrice);
+		}
+
+		[HttpGet]
+		public IActionResult GetVendorId(int key, ODataQueryOptions<Product> options, [FromServices] IDataService<Product, int> dataService)
+		{
+			return GetProperty(key, dataService, x => x.VendorId);
+		}
+
+		[HttpGet]
+		[EnableQuery]
+		public IActionResult GetVendor(int key, ODataQueryOptions<Product> options, [FromServices] IDataService<Product, int> dataService)
+		{
+			try
+			{
+				var item = dataService.Get(key).Select(x => x.Vendor);
+				if (!item.Any()) return NotFound();
+
+				return Ok(SingleResult.Create(item));
+			}
+			catch (NotFoundException)
+			{
+				return NotFound();
+			}
+		}
+
 		//[EnableQuery]
 		//public IActionResult GetCategory(int key, ODataQueryOptions<Product> options)
 		//{

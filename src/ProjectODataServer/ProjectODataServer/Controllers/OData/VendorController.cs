@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Mvc;
 using ProjectODataServer.Services;
-using ProjectODataServer.WebApi.Controllers;
 using Sample.Data.Entities;
 using Sample.Data.Services;
 
 namespace ProjectODataServer.Controllers.OData
 {
-	public class VendorController : EntityODataController<Vendor, int>
+	public class VendorController : SampleControllerBase<Vendor, int>
 	{
 		[EnableQuery]
 		public IActionResult GetProducts(int key, [FromServices] IVendorDataService vendorDataService)
@@ -20,6 +20,12 @@ namespace ProjectODataServer.Controllers.OData
 			{
 				return NotFound();
 			}
+		}
+
+		[HttpGet]
+		public IActionResult GetName(int key, ODataQueryOptions<Product> options, [FromServices] IDataService<Vendor, int> dataService)
+		{
+			return GetProperty(key, dataService, x => x.Name);
 		}
 
 		protected override bool IsEnabledForPut => false;
