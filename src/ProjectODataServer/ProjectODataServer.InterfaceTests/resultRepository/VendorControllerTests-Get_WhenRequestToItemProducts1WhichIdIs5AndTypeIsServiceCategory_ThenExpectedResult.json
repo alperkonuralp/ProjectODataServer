@@ -1,0 +1,1 @@
+{"@odata.context":"https://localhost:5001/odata/$metadata#Product/Sample.ServiceProduct/$entity","@odata.type":"#Sample.ServiceProduct","Name":"Azure E03 Virtual Machine","UnitPrice":0.9,"VendorId":1,"CreatedBy":-1,"ModifiedBy":-1,"Id":5,"Description":"4VCPU, 8GB Ram Description","LongDescription":"4VCPU, 8GB Ram Long Description","UnitType":"Hour","CategoryId":9}

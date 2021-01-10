@@ -53,6 +53,28 @@ namespace ProjectODataServer.InterfaceTests
 			return true;
 		}
 
+		public static bool GetAndCompareStringResultFromWebRequestAndStoredData(
+			string address,
+			string expectedResultFileName
+			)
+		{
+			using var webClient = new WebClient();
+
+			var result = webClient.DownloadString(address);
+
+			if (!File.Exists(expectedResultFileName))
+			{
+				File.WriteAllText(expectedResultFileName, result);
+			}
+			else
+			{
+				var expectedResult = File.ReadAllText(expectedResultFileName);
+
+				result.ShouldBe(expectedResult);
+			}
+			return true;
+		}
+
 		public static string GetAndCompareResultFromWebRequest(string address, string expectedResult)
 		{
 			using var webClient = new WebClient();

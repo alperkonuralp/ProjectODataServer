@@ -28,6 +28,16 @@ namespace ProjectODataServer.InterfaceTests
 		}
 
 		[Fact]
+		public void Get_WhenRequestToAllItemsOnlyLongDescritionColumn_ThenExpectedResult()
+		{
+			var result = TestHelperService.GetAndCompareResultFromWebRequestAndStoredData(
+				"https://localhost:5001/odata/product/Sample.ServiceProduct?$select=longDescription",
+				"..\\..\\..\\resultRepository\\ProductControllerTests-Get_WhenRequestToAllItemsOnlyLongDescritionColumn_ThenExpectedResult.json");
+
+			result.ShouldBeTrue();
+		}
+
+		[Fact]
 		public void Get_WhenRequestToItemWhichIdIs1_ThenExpectedResult()
 		{
 			var result = TestHelperService.GetAndCompareResultFromWebRequestAndStoredData(
