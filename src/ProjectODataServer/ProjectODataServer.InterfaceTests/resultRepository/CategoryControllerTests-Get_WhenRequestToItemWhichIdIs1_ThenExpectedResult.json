@@ -1,0 +1,1 @@
+{"@odata.context":"https://localhost:5001/odata/$metadata#Category/Sample.ShoppingCategory/$entity","@odata.type":"#Sample.ShoppingCategory","Name":"Foods","CreatedBy":-1,"ModifiedBy":-1,"Id":1,"ParentId":null}

@@ -1,0 +1,1 @@
+{"@odata.context":"https://localhost:5001/odata/$metadata#Product/Sample.ShoppingProduct/$entity","@odata.type":"#Sample.ShoppingProduct","Name":"Hamburger","UnitPrice":15.5,"VendorId":4,"CreatedBy":-1,"ModifiedBy":-1,"Id":1,"Description":"Hamburger Description","ShortDescription":"Hamburger Short Description","UnitType":"Item","CategoryId":3}

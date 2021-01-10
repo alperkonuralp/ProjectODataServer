@@ -1,0 +1,1 @@
+{"@odata.context":"https://localhost:5001/odata/$metadata#Category/Sample.ServiceCategory","value":[{"Name":"Virtual Machine","CreatedBy":-1,"ModifiedBy":-1,"Id":9,"ParentId":7}]}

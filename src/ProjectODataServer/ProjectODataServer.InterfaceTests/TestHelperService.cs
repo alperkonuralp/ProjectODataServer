@@ -25,7 +25,7 @@ namespace ProjectODataServer.InterfaceTests
 			return MessagePackSerializer.ConvertToJson(resultBytes);
 		}
 
-		public static void GetAndCompareResultFromWebRequestAndStoredData(
+		public static bool GetAndCompareResultFromWebRequestAndStoredData(
 			string address,
 			string expectedResultFileName,
 			Action<Dictionary<object, object>> beforeOperation = null
@@ -50,6 +50,7 @@ namespace ProjectODataServer.InterfaceTests
 
 				result.ShouldBe(expectedResult);
 			}
+			return true;
 		}
 
 		public static string GetAndCompareResultFromWebRequest(string address, string expectedResult)
