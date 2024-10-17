@@ -13,11 +13,11 @@
     <PackageReference Include="Castle.Windsor" Version="5.1.1" />
     <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.4.0" />
     <PackageReference Include="log4net" Version="2.0.12" />
-    <PackageReference Include="MessagePack" Version="2.2.85" />
+    <PackageReference Include="MessagePack" Version="2.5.187" />
     <PackageReference Include="MessagePack.AspNetCoreMvcFormatter" Version="2.2.85" />
     <PackageReference Include="MessagePackAnalyzer" Version="2.2.85" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.5.0" />
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
       <PrivateAssets>all</PrivateAssets>
